@@ -1,0 +1,55 @@
+{
+  "cod": "200",
+  "message": 0,
+  "cnt": 40,
+  "list": [
+    {
+      "dt": 1613563200,
+      "main": {
+        "temp": 272.6,
+        "feels_like": 269.5,
+        "temp_min": 272.6,
+        "temp_max": 272.6,
+        "pressure": 1021,
+        "sea_level": 1021,
+        "grnd_level": 996,
+        "humidity": 93,
+        "temp_kf": 0
+      },
+      "weather": [
+        {
+          "id": 802,
+          "main": "Clouds",
+          "description": "scattered clouds",
+          "icon": "03n"
+        }
+      ],
+      "clouds": {
+        "all": 31
+      },
+      "wind": {
+        "speed": 1.28,
+        "deg": 25
+      },
+      "visibility": 10000,
+      "pop": 0,
+      "sys": {
+        "pod": "n"
+      },
+      "dt_txt": "2021-02-17 12:00:00"
+    }
+  ],
+  "city": {
+    "id": 4219762,
+    "name": "Rome",
+    "coord": {
+      "lat": 34.257,
+      "lon": -85.1647
+    },
+    "country": "US",
+    "population": 36303,
+    "timezone": -18000,
+    "sunrise": 1613132914,
+    "sunset": 1613172084
+  }
+}
