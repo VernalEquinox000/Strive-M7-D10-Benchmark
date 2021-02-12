@@ -5,6 +5,8 @@ import {
   FormControl,
   Button,
   Row,
+  Col,
+  Card,
 } from "react-bootstrap";
 import { RouteComponentProps } from "react-router-dom";
 
@@ -132,7 +134,14 @@ const Search = (props: RouteComponentProps) => {
         </div>
 
         <Row>
-          <p></p>
+          <Col>
+            <Card>
+              <Card.Img variant="top" src="holder.js/100px180" />
+              <Card.Body>
+                <Card.Text>{weathers && weathers.name}</Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
         </Row>
       </Container>
 
