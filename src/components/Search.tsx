@@ -18,7 +18,7 @@ import { RouteComponentProps } from "react-router-dom";
     country: string;
   };
 } */
-
+/* 
 interface WeatherData {
   coord: {
     lon: number;
@@ -56,31 +56,47 @@ interface WeatherData {
   name: string;
   cod: number;
 }
+*/
 
-interface Weather {
-  description: string;
-  icon: string;
-  id: number;
-  main: string;
+interface WeatherAPI {
+  weather: [
+    {
+      id: number;
+      main: string;
+      description: string;
+      icon: string;
+    }
+  ];
+  main: {
+    temp: number;
+    temp_max: number;
+    temp_min: number;
+    feels_like: number;
+  };
+  wind: {
+    speed: number;
+  };
+  clouds: {
+    all: number;
+  };
+
+  name: string;
 }
 
 const Search = (props: RouteComponentProps) => {
   const [searchResult, setSearchResult] = useState<string>("");
-  const [weathers, setWeathers] = useState<WeatherData>();
+  const [weathers, setWeathers] = useState<WeatherAPI | null>(null);
 
   const fetchForecast = async (query: string) => {
     try {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=${process.env.API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=91a5b5f2f697622e15b9a40ea3b2e981`
       );
-      const weathers = response.json();
+      let data = await response.json();
+      console.log(data);
+      setWeathers(data);
+      setSearchResult("");
       console.log(weathers);
-      if (response.ok) {
-        setWeathers(weathers);
-        setSearchResult("");
-      } else {
-        alert("Something went wrong!");
-      }
     } catch (error) {
       console.log(error);
     }
@@ -110,9 +126,7 @@ const Search = (props: RouteComponentProps) => {
         </div>
 
         <Row>
-          {/* {weather.map((w, index) => (
-            <p key={`w${index}`}></p>
-          ))} */}
+          <p></p>
         </Row>
       </Container>
 
