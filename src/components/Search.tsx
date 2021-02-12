@@ -8,7 +8,7 @@ import {
 } from "react-bootstrap";
 import { RouteComponentProps } from "react-router-dom";
 
-interface IProps {
+/*interface  IProps {
   cod: string;
   message: number;
   cnt: number;
@@ -17,22 +17,66 @@ interface IProps {
     name: string;
     country: string;
   };
+} */
+
+interface WeatherData {
+  coord: {
+    lon: number;
+    lat: number;
+  };
+  weather: Weather[];
+  base: string;
+  main: {
+    temp: number;
+    feels_like: number;
+    temp_min: number;
+    temp_max: number;
+    pressure: number;
+    humidity: number;
+  };
+  visibility: number;
+  wind: {
+    speed: number;
+    deg: number;
+  };
+  clouds: {
+    all: number;
+  };
+  dt: number;
+  sys: {
+    type: number;
+    id: number;
+    message: number;
+    country: string;
+    sunrise: number;
+    sunset: number;
+  };
+  timezone: number;
+  id: number;
+  name: string;
+  cod: number;
+}
+
+interface Weather {
+  description: string;
+  icon: string;
+  id: number;
+  main: string;
 }
 
 const Search = (props: RouteComponentProps) => {
   const [searchResult, setSearchResult] = useState<string>("");
-  const [weathers, setWeathers] = useState<IProps[]>([]);
+  const [weathers, setWeathers] = useState<WeatherData>();
 
   const fetchForecast = async (query: string) => {
     try {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=91a5b5f2f697622e15b9a40ea3b2e981`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=${process.env.API_KEY}`
       );
       const weathers = response.json();
       console.log(weathers);
-      console.log(weathers);
       if (response.ok) {
-        //setWeathers(weathers);
+        setWeathers(weathers);
         setSearchResult("");
       } else {
         alert("Something went wrong!");
