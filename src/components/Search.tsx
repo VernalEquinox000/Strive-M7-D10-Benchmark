@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   InputGroup,
@@ -90,17 +90,23 @@ const Search = (props: RouteComponentProps) => {
   const fetchForecast = async (query: string) => {
     try {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=91a5b5f2f697622e15b9a40ea3b2e981`
+        `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${process.env.API_KEY}`
       );
       let data = await response.json();
       console.log(data);
       setWeathers(data);
       setSearchResult("");
+
       console.log(weathers);
     } catch (error) {
       console.log(error);
     }
   };
+
+  /*    useEffect(() => {
+      setWeathers(data);
+      setSearchResult("");
+    }); */
 
   return (
     <div>
