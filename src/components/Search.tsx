@@ -9,58 +9,9 @@ import {
   Card,
 } from "react-bootstrap";
 import { RouteComponentProps } from "react-router-dom";
+import { IWeather } from "../types/interfaces";
 
-/*interface  IProps {
-  cod: string;
-  message: number;
-  cnt: number;
-  list: { dt: number };
-  city: {
-    name: string;
-    country: string;
-  };
-} */
-/* 
-interface WeatherData {
-  coord: {
-    lon: number;
-    lat: number;
-  };
-  weather: Weather[];
-  base: string;
-  main: {
-    temp: number;
-    feels_like: number;
-    temp_min: number;
-    temp_max: number;
-    pressure: number;
-    humidity: number;
-  };
-  visibility: number;
-  wind: {
-    speed: number;
-    deg: number;
-  };
-  clouds: {
-    all: number;
-  };
-  dt: number;
-  sys: {
-    type: number;
-    id: number;
-    message: number;
-    country: string;
-    sunrise: number;
-    sunset: number;
-  };
-  timezone: number;
-  id: number;
-  name: string;
-  cod: number;
-}
-*/
-
-interface WeatherAPI {
+/* interface WeatherAPI {
   weather: [
     {
       id: number;
@@ -84,15 +35,15 @@ interface WeatherAPI {
 
   name: string;
 }
-
+ */
 const Search = (props: RouteComponentProps) => {
   const [searchResult, setSearchResult] = useState<string>("");
-  const [weathers, setWeathers] = useState<WeatherAPI | null>(null);
+  const [weathers, setWeathers] = useState<IWeather | null>(null);
 
   const fetchForecast = async (query: string) => {
     try {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${process.env.API_KEY}`
+        `${process.env.REACT_APP_API_URL}?q=${query}&appid=${process.env.REACT_APP_API_KEY}`
       );
       let data = await response.json();
       console.log(data);
@@ -105,10 +56,23 @@ const Search = (props: RouteComponentProps) => {
     }
   };
 
-  /*    useEffect(() => {
-      setWeathers(data);
-      setSearchResult("");
-    }); */
+  useEffect(() => {
+    const fetchForecast = async (query: string) => {
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}?q=${query}&appid=${process.env.REACT_APP_API_KEY}`
+        );
+        let data = await response.json();
+        console.log(data);
+        setWeathers(data);
+        setSearchResult("");
+
+        console.log(weathers);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  });
 
   return (
     <div>
