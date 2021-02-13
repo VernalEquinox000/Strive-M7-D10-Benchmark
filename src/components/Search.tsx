@@ -56,24 +56,6 @@ const Search = (props: RouteComponentProps) => {
     }
   };
 
-  useEffect(() => {
-    const fetchForecast = async (query: string) => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_API_URL}?q=${query}&appid=${process.env.REACT_APP_API_KEY}`
-        );
-        let data = await response.json();
-        console.log(data);
-        setWeathers(data);
-        setSearchResult("");
-
-        console.log(weathers);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  });
-
   return (
     <div>
       <Container>
