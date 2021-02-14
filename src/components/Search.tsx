@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   Container,
   InputGroup,
+  Form,
   FormControl,
   Button,
   Row,
@@ -38,23 +39,23 @@ import { IWeather, Clouds, Main, Weather } from "../types/interfaces";
  */
 
 const Search = (props: RouteComponentProps) => {
-  const [searchResult, setSearchResult] = useState<string>("");
+  const [cityResult, setCityResult] = useState<string>("Rome");
+  const [stateResult, setStateResult] = useState<string | null>("Italy");
+  const [setCode, setStateCode] = useState<string | null>("00100");
   const [weathers, setWeathers] = useState<IWeather | null>(null);
   const [clouds, setClouds] = useState<Clouds | null>(null);
   const [temperature, setTemperature] = useState<Main | null>(null);
   const [weather, setWeather] = useState<Weather | null>(null);
 
-  const fetchForecast = async (query: string) => {
+  const fetchForecast = async (city: string, state?: string, code?: string) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}?q=${query}&appid=${process.env.REACT_APP_API_KEY}`
+        `${process.env.REACT_APP_API_URL}?q=${city},${state},${code}&appid=${process.env.REACT_APP_API_KEY}`
       );
       let data = await response.json();
-      console.log(data);
       setWeathers(data);
 
       let clouds = data.clouds;
-      console.log(clouds);
       setClouds(clouds);
 
       let temperature = data.temperature;
@@ -71,26 +72,52 @@ const Search = (props: RouteComponentProps) => {
     }
   };
 
+  puppa = (e) => {
+    e.preventDefault();
+    fetchForecast();
+  };
+
   return (
     <div>
       <Container>
         <div className="d-flex justify-content-center">
           <InputGroup className="my-3 w-50">
-            <FormControl
-              placeholder="Search for a city..."
-              aria-label="Search for a city..."
-              aria-describedby="basic-addon2"
-              value={searchResult}
-              onChange={(e) => setSearchResult(e.currentTarget.value)}
-            />
-            <InputGroup.Append>
-              <Button
-                variant="outline-light"
-                onClick={() => fetchForecast(searchResult)}
-              >
-                Search
-              </Button>
-            </InputGroup.Append>
+            <Form
+              inline
+              onSubmit={() => {
+                puppa();
+              }}
+            >
+              <FormControl
+                placeholder="Search for a city..."
+                aria-label="Search for a city..."
+                aria-describedby="basic-addon2"
+                value={searchResult}
+                onChange={(e) => setSearchResult(e.currentTarget.value)}
+              />
+              <FormControl
+                placeholder="Search for a city..."
+                aria-label="Search for a city..."
+                aria-describedby="basic-addon2"
+                value={searchResult}
+                onChange={(e) => setSearchResult(e.currentTarget.value)}
+              />
+              <FormControl
+                placeholder="Search for a city..."
+                aria-label="Search for a city..."
+                aria-describedby="basic-addon2"
+                value={searchResult}
+                onChange={(e) => setSearchResult(e.currentTarget.value)}
+              />
+              <InputGroup.Append>
+                <Button
+                  variant="outline-light"
+                  onClick={() => fetchForecast(searchResult)}
+                >
+                  City
+                </Button>
+              </InputGroup.Append>
+            </Form>
           </InputGroup>
         </div>
 
