@@ -9,7 +9,7 @@ import {
   Card,
 } from "react-bootstrap";
 import { RouteComponentProps } from "react-router-dom";
-import { IWeather } from "../types/interfaces";
+import { IWeather, Clouds } from "../types/interfaces";
 
 /* interface WeatherAPI {
   weather: [
@@ -36,9 +36,11 @@ import { IWeather } from "../types/interfaces";
   name: string;
 }
  */
+
 const Search = (props: RouteComponentProps) => {
   const [searchResult, setSearchResult] = useState<string>("");
   const [weathers, setWeathers] = useState<IWeather | null>(null);
+  const [clouds, setClouds] = useState<Clouds | null>(null);
 
   const fetchForecast = async (query: string) => {
     try {
@@ -48,6 +50,9 @@ const Search = (props: RouteComponentProps) => {
       let data = await response.json();
       console.log(data);
       setWeathers(data);
+      let clouds = data.clouds;
+      console.log(clouds);
+      setClouds(clouds);
       setSearchResult("");
 
       console.log(weathers);
@@ -85,6 +90,7 @@ const Search = (props: RouteComponentProps) => {
               <Card.Img variant="top" src="holder.js/100px180" />
               <Card.Body>
                 <Card.Text>{weathers && weathers.name}</Card.Text>
+                <p>{clouds && clouds.all}</p>
               </Card.Body>
             </Card>
           </Col>
