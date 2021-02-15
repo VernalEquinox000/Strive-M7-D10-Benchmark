@@ -95,7 +95,56 @@ const Search = (props: RouteComponentProps) => {
     <div>
       <Container>
         <div className="d-flex justify-content-center">
-          <InputGroup className="my-3 w-50">
+          <Form>
+            <Form.Group as={Row} controlId="formHorizontalCity">
+              <Form.Label column sm={2}>
+                City
+              </Form.Label>
+              <Col sm={6}>
+                <Form.Control
+                  placeholder="City"
+                  value={cityResult}
+                  onChange={(e) => setCityResult(e.currentTarget.value)}
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} controlId="formHorizontalPassword">
+              <Form.Label column sm={2}>
+                State
+              </Form.Label>
+              <Col sm={6}>
+                <Form.Control
+                  placeholder="State"
+                  value={stateResult}
+                  onChange={(e) => setStateResult(e.currentTarget.value)}
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} controlId="formHorizontalPassword">
+              <Form.Label column sm={2}>
+                Post Code
+              </Form.Label>
+              <Col sm={6}>
+                <Form.Control
+                  placeholder="Post code"
+                  value={codeResult}
+                  onChange={(e) => setCodeResult(e.currentTarget.value)}
+                />
+              </Col>
+            </Form.Group>
+            <Button
+              variant="outline-light"
+              onClick={(e) =>
+                fetchForecast(cityResult, stateResult, codeResult)
+              }
+            >
+              Search
+            </Button>
+          </Form>
+
+          {/* <InputGroup className="my-3 w-50">
             <Form inline>
               <FormControl
                 placeholder="Search for a city..."
@@ -129,7 +178,7 @@ const Search = (props: RouteComponentProps) => {
                 </Button>
               </InputGroup.Append>
             </Form>
-          </InputGroup>
+          </InputGroup> */}
         </div>
 
         <Row>
