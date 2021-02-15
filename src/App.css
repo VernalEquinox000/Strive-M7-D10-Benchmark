@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.jumbotron {
+  background-image: url(https://s7d2.scene7.com/is/image/TWCNews/1031_nc_sunny_weather_3-1);
+}
+
+.jumbotron p {
+  font: white !important;
+}
+
+.form  {
+  background-color: lightblue;
+}
