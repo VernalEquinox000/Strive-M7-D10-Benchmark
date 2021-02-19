@@ -95,7 +95,7 @@ const Search = (props: RouteComponentProps) => {
     <div>
       <Container>
         <div className="d-flex justify-content-center">
-          <Form backgroundColor="blue">
+          <Form>
             <Form.Group as={Row} controlId="formHorizontalCity">
               <Form.Label column sm={2}>
                 City
